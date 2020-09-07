@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Setup go
+        uses: actions/setup-go@v2
+      
+      - name: Install dependencies
+        run: |
+          npm i -g yarn
+          cd verto
+          yarn
+
+      - name: Build website source
+        run: |
+          cd verto
+          yarn build
+
+      - name: Install libwebkit
+        if: startsWith(matrix.os, 'ubuntu')
+        run: sudo apt-get install libwebkit2gtk-4.0-dev
+      
+      - name: Install statik
+        run: go get github.com/rakyll/statik
+      
+      - name: Compile website
+        run: statik -src=./verto/__sapper__/export
+      
+      - name: Build desktop app
+        run: go build desktop.go
+        
