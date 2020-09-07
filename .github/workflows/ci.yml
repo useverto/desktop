@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Setup node
         uses: actions/setup-node@v1
