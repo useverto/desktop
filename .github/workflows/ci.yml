@@ -26,15 +26,14 @@ jobs:
         uses: actions/setup-go@v2
       
       - name: Install dependencies
+        working-directory: ./verto
         run: |
           npm i -g yarn
-          cd verto
           yarn
 
       - name: Build website source
-        run: |
-          cd verto
-          yarn build
+        working-directory: ./verto
+        run: yarn build
 
       - name: Install libwebkit
         if: startsWith(matrix.os, 'ubuntu')
@@ -48,4 +47,4 @@ jobs:
       
       - name: Build desktop app
         run: go build desktop.go
-        
+
