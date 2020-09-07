@@ -20,7 +20,7 @@ func main() {
 	w := webview.New(debug)
 	defer w.Destroy()
 	w.SetTitle("Verto")
-	w.SetSize(340, 370, webview.HintNone)
+	w.SetSize(2000, 2000, webview.HintNone)
 	// bind methods
 	w.Bind("quit", func() {
 		w.Terminate()
