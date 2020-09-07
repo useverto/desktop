@@ -1,0 +1,3 @@
+[submodule "verto"]
+	path = verto
+	url = https://github.com/useverto/verto
