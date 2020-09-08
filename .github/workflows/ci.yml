@@ -50,7 +50,7 @@ jobs:
           go get github.com/rakyll/statik
       
       - name: Compile website
-        run: go run ./src/github.com/rakyll/statik/statik.go -src=./verto/__sapper__/export
+        run: go run ./src/github.com/rakyll/statik/statik.go -src=../../../verto/__sapper__/export
       
       - name: Build desktop app
         run: go build desktop.go
