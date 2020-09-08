@@ -44,7 +44,7 @@ jobs:
           sudo apt-get install libwebkit2gtk-4.0-dev
       
       - name: Install statik
-        run: go get github.com/rakyll/statik
+        run: go install github.com/rakyll/statik
       
       - name: Compile website
         run: statik -src=./verto/__sapper__/export
