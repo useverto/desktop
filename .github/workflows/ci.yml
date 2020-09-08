@@ -9,6 +9,8 @@ jobs:
     name: Build
 
     runs-on: ${{ matrix.os }}
+    env:
+      GOPATH: ${{ github.workspace }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -44,10 +46,11 @@ jobs:
           sudo apt-get install libwebkit2gtk-4.0-dev
       
       - name: Install statik
-        run: go install github.com/rakyll/statik
+        run: |
+          go get github.com/rakyll/statik
       
       - name: Compile website
-        run: statik -src=./verto/__sapper__/export
+        run: ./src/github.com/rakyll/statik -src=./verto/__sapper__/export
       
       - name: Build desktop app
         run: go build desktop.go
