@@ -10,7 +10,7 @@
   </p>
 
   <p align="center">
-    <img src="https://github.com/useverto/desktop/workflows/ci/badge.svg" alt="Fancy CI badge" />
+    <img src="./assets/desktop.png" alt="Verto Home Screenshot" />
   </p>
 
 </p>
