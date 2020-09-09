@@ -13,7 +13,7 @@ jobs:
       GOPATH: ${{ github.workspace }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Setup repo
