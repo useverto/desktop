@@ -51,6 +51,7 @@ jobs:
       - name: Install statik
         run: | 
           go get github.com/rakyll/statik
+          go get github.com/webview/webview
           
       
       - name: Compile website

@@ -10,7 +10,7 @@
   </p>
 
   <p align="center">
-    <img src="https://github.com/t8/trading-post-v2/workflows/ci/badge.svg" alt="Fancy CI badge" />
+    <img src="https://github.com/useverto/desktop/workflows/ci/badge.svg" alt="Fancy CI badge" />
   </p>
 
 </p>
