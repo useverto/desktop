@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
+          path: './src/github.com/useverto/desktop'
 
       - name: Setup node
         uses: actions/setup-node@v1
