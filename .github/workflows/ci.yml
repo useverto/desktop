@@ -51,9 +51,7 @@ jobs:
       
       - name: Install statik
         run: | 
-          go get github.com/rakyll/statik
-          go get github.com/webview/webview
-          
+          go get github.com/rakyll/statik          
       
       - name: Compile website
         run: go run ./src/github.com/rakyll/statik/statik.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
