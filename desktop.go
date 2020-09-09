@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/rakyll/statik/fs"
-	"github.com/webview/webview"
+	"github.com/useverto/desktop/webview"
 
 	_ "github.com/useverto/desktop/statik"
 )
