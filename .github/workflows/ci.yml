@@ -56,7 +56,8 @@ jobs:
           
       
       - name: Compile website
-        run: go run ./src/github.com/rakyll/statik/statik.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export
+        working-directory: ./src/github.com/useverto/desktop
+        run: go run ./statik.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export
       
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
