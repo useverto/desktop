@@ -7,7 +7,7 @@ import (
 	"github.com/rakyll/statik/fs"
 	"github.com/useverto/desktop/webview"
 
-	_ "github.com/useverto/desktop/statik"
+	_ "github.com/useverto/desktop/bundle"
 )
 
 func main() {
