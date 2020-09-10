@@ -13,7 +13,7 @@ jobs:
       GOPATH: ${{ github.workspace }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Setup repo
@@ -30,9 +30,6 @@ jobs:
       - name: Setup go
         uses: actions/setup-go@v2
       
-      - name: setup Docker
-        uses: docker-practice/actions-setup-docker@master
-
       - name: Install dependencies
         working-directory: ./src/github.com/useverto/desktop/verto
         run: |
@@ -55,11 +52,15 @@ jobs:
       - name: Install statik
         run: | 
           go get github.com/rakyll/statik          
-          go get github.com/karalabe/xgo
       
       - name: Compile website
         run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
       
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
-        run: go run github.com/karalabe/xgo --targets=linux/*,darwin/*,windows/* .
+        run: go build .
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: verto-${{ matrix.os }}
+          path: ./src/github.com/useverto/desktop/desktop
