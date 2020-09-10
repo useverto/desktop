@@ -3,8 +3,8 @@ web:
 
 run:
 	go run ./fs/embed.go -src=./verto/__sapper__/export
-	go run desktop.go
+	go run .
 
 build:
 	go run ./fs/embed.go -src=./verto/__sapper__/export
-	go build desktop.go
+	go build .
