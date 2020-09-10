@@ -2,9 +2,7 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/rakyll/statik/fs"
 	"github.com/useverto/desktop/webview"
 
 	_ "github.com/useverto/desktop/bundle"
@@ -31,18 +29,4 @@ func main() {
 
 	// Run webview
 	w.Run()
-}
-
-// Loadview load view
-func Loadview() {
-
-	statikFS, err := fs.New()
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Serve the contents over HTTP.
-	http.Handle("/", http.StripPrefix("/", http.FileServer(statikFS)))
-	go func() {
-		http.ListenAndServe(":8000", nil)
-	}()
 }
