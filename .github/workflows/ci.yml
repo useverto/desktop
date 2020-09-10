@@ -58,7 +58,18 @@ jobs:
       
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'ubuntu')
         run: go build .
+      
+      - name: Build desktop app
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'macos')
+        run: go build .
+
+      - name: Build desktop app
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'macos')
+        run: go build -ldflags="-H windowsgui" .
 
       - uses: actions/upload-artifact@v2
         with:
