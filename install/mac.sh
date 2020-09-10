@@ -1,19 +1,14 @@
 set -e
 
-if [ "$(uname -m)" != "x86_64" ]; then
-  echo "Error: Unsupported architecture $(uname -m). Only x64 binaries are available." 1>&2
-  exit 1
-fi
-
 if ! command -v unzip >/dev/null; then
   echo "Error: unzip is required to install Verto Desktop." 1>&2
   exit 1
 fi
 
 if [ $# -eq 0 ]; then
-  release_uri="https://github.com/useverto/desktop/releases/latest/download/verto-x64-linux.zip"
+  release_uri="https://github.com/useverto/desktop/releases/latest/download/verto-x64-macos.zip"
 else
-  release_uri="https://github.com/useverto/desktop/releases/download/${1}/verto-x64-linux.zip"
+  release_uri="https://github.com/useverto/desktop/releases/download/${1}/verto-x64-macos.zip"
 fi
 
 install_dir="${VERTO_INSTALL:-$HOME/.verto}"
@@ -40,6 +35,6 @@ else
   esac
   echo "Manually add the directory to your \$HOME/$shell_profile (or similar)"
   echo "  export VERTO_DEKSTOP_INSTALL=\"$install_dir\""
-  echo "  export PATH=\"\$VERTO_DESKTOP_INSTALL:\$PATH\""
+  echo "  export PATH=\"\$VERTO_DEKSTOP_INSTALL:\$PATH\""
   echo "Run '$exe' to get started"
 fi
