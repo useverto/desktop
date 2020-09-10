@@ -62,5 +62,5 @@ jobs:
       
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
-        run: go run github.com/karalabe/xgo github.com/useverto/desktop
+        run: go run github.com/karalabe/xgo .
 
