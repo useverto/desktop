@@ -30,6 +30,9 @@ jobs:
       - name: Setup go
         uses: actions/setup-go@v2
       
+      - name: setup Docker
+        uses: docker-practice/actions-setup-docker@master
+
       - name: Install dependencies
         working-directory: ./src/github.com/useverto/desktop/verto
         run: |
