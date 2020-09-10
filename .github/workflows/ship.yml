@@ -74,13 +74,13 @@ jobs:
           Compress-Archive -CompressionLevel Optimal -Force -Path desktop.exe, README.md -DestinationPath desktop-x64-windows.zip
       
       - name: Upload release artifacts
-          uses: actions/upload-artifact@v2
-          with:
-            name: release
-            path: |
-              verto-x64-linux.zip
-              verto-x64-macos.zip
-              verto-x64-windows.zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: |
+            desktop-x64-linux.zip
+            desktop-x64-macos.zip
+            desktop-x64-windows.zip
   
         - name: Download artifacts
           uses: actions/download-artifact@v2
