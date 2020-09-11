@@ -76,5 +76,5 @@ jobs:
           name: verto-${{ matrix.os }}
           path: |
             ./src/github.com/useverto/desktop/desktop
-            ./src/github.com/useverto/desktop/verto_desktop.app/Contents/MacOS/verto_desktop
+            ./src/github.com/useverto/desktop/verto_desktop.app
             ./src/github.com/useverto/desktop/desktop.exe
