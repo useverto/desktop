@@ -62,7 +62,7 @@ func main() {
 			fmt.Println("File reading error", err)
 			return "{}"
 		}
-		retrun string(data)
+		return string(data)
 	})
 
 	// Render view
