@@ -9,8 +9,8 @@ const version = "0.1.0"
 // NeedsUpgrade check if verto desktop is updated or not
 func NeedsUpgrade() bool {
 	githubTag := &latest.GithubTag{
-		Owner:      "username",
-		Repository: "reponame",
+		Owner:      "useverto",
+		Repository: "desktop",
 	}
 
 	res, _ := latest.Check(githubTag, version)

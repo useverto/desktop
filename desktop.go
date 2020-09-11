@@ -14,8 +14,10 @@ func main() {
 	debug := true
 
 	if NeedsUpgrade() {
-
+		log.Printf("%s is not latest, upgrading...", version)
 	}
+
+	// start the server with website source
 	Loadview()
 
 	// create webview instance
