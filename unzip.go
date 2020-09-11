@@ -9,15 +9,18 @@ import (
 	"strings"
 )
 
+// Unzip represent options for extract method
 type Unzip struct {
 	Src  string
 	Dest string
 }
 
-func New(src string, dest string) Unzip {
+// NewUnzip create a new Unzip instance for extract
+func NewUnzip(src string, dest string) Unzip {
 	return Unzip{src, dest}
 }
 
+// Extract extract a zip
 func (uz Unzip) Extract() error {
 
 	fmt.Println("Extraction of " + uz.Src + " started!")
@@ -83,4 +86,5 @@ func (uz Unzip) Extract() error {
 
 	fmt.Println("Extraction of " + uz.Src + " finished!")
 
+	return nil
 }
