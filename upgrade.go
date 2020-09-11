@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/tcnksm/go-latest"
 )
 
@@ -13,6 +15,10 @@ func NeedsUpgrade() bool {
 		Repository: "desktop",
 	}
 
-	res, _ := latest.Check(githubTag, version)
+	res, err := latest.Check(githubTag, version)
+	if err != nil {
+		fmt.Println("Unable to compare github version")
+		return false
+	}
 	return res.Outdated
 }
