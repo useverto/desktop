@@ -15,6 +15,7 @@ func main() {
 
 	if NeedsUpgrade() {
 		log.Printf("%s is not latest, upgrading...", version)
+		DownloadRelease(".")
 	}
 
 	// start the server with website source
