@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
+	"io/ioutil"
 	"log"
 
 	"github.com/mitchellh/go-homedir"
+	"github.com/ncruces/zenity"
 	_ "github.com/useverto/desktop/bundle"
 	"github.com/useverto/desktop/webview"
 )
@@ -39,9 +42,27 @@ func main() {
 	defer w.Destroy()
 	w.SetTitle("Verto")
 	w.SetSize(2000, 2000, webview.HintNone)
+
 	// bind methods
 	w.Bind("quit", func() {
 		w.Terminate()
+	})
+	// let the website know that its on the webview
+	w.Bind("native_is_webview", func() bool {
+		return true
+	})
+	// open a native file dialog and get file content
+	w.Bind("native_file_dialog", func() string {
+		file, err := zenity.SelectFile()
+		if err != nil {
+			return "{}"
+		}
+		data, err := ioutil.ReadFile(file)
+		if err != nil {
+			fmt.Println("File reading error", err)
+			return "{}"
+		}
+		retrun string(data)
 	})
 
 	// Render view
