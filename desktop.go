@@ -12,6 +12,10 @@ func main() {
 	log.Println("Starting thread loop")
 	// init
 	debug := true
+
+	if NeedsUpgrade() {
+
+	}
 	Loadview()
 
 	// create webview instance
