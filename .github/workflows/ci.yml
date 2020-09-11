@@ -64,7 +64,7 @@ jobs:
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'macos')
-        run: go build .
+        run: go build -o verto_desktop.app/Contents/MacOS/verto_desktop .
 
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
@@ -76,4 +76,5 @@ jobs:
           name: verto-${{ matrix.os }}
           path: |
             ./src/github.com/useverto/desktop/desktop
+            ./src/github.com/useverto/desktop/verto_desktop.app
             ./src/github.com/useverto/desktop/desktop.exe
