@@ -49,9 +49,8 @@ jobs:
           sudo apt-get install libwebkit2gtk-4.0-dev
           
       
-      - name: Install statik
-        run: | 
-          go get github.com/rakyll/statik          
+      - name: Install GO dependencies
+        run: go mod download     
       
       - name: Compile website
         run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
