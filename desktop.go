@@ -44,6 +44,12 @@ func main() {
 	w.SetTitle("Verto")
 	w.SetSize(2000, 2000, webview.HintNone)
 	w.Init(`
+	function addStyle(styleString) {
+		const style = document.createElement('style');
+		style.textContent = styleString;
+		document.head.append(style);
+	}
+	addStyle("* { -webkit-font-smoothing: antialiased; -webkit-text-stroke: 0.5px; }");
 	let x = setInterval(() => assignFileDialog(), 200);
 	async function assignFileDialog() {
 		if(window.location.pathname.startsWith("/login")) {
