@@ -3,6 +3,7 @@ module github.com/useverto/desktop
 go 1.14
 
 require (
+	github.com/Dev43/arweave-go v0.0.2
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/google/go-github v17.0.0+incompatible // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
