@@ -35,6 +35,7 @@ func main() {
 
 	// start the server with website source
 	Loadview()
+
 	ui, err := lorca.New("http://localhost:8000/", "", 480, 320)
 	if err != nil {
 		fmt.Println(err)
