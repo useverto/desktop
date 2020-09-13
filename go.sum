@@ -1,5 +1,18 @@
 github.com/Dev43/arweave-go v0.0.2 h1:FCev9zsObUkqrIuToGKrx12C/SeWwAXJ3h+4D8vGhtI=
 github.com/Dev43/arweave-go v0.0.2/go.mod h1:C6uCtHMNvsimhVAnVWO7vs3c3Ug6IaHu6ITxklyv/1U=
+github.com/akavel/rsrc v0.8.0 h1:zjWn7ukO9Kc5Q62DOJCcxGpXC18RawVtYAGdz2aLlfw=
+github.com/akavel/rsrc v0.8.0/go.mod h1:uLoCtb9J+EyAqh+26kdrTgmzRBFPGOolLWKpdxkKq+c=
+github.com/akavel/rsrc v0.9.0 h1:HwUDC0+tMFWqN4D5G+o5siGD4oVsC3jn6zM8ocjc3nY=
+github.com/akavel/rsrc v0.9.0/go.mod h1:uLoCtb9J+EyAqh+26kdrTgmzRBFPGOolLWKpdxkKq+c=
+github.com/asticode/go-astikit v0.6.0/go.mod h1:h4ly7idim1tNhaVkdVBeXQZEE3L0xblP7fCWbgwipF0=
+github.com/asticode/go-astikit v0.8.0 h1:wWT7xLp96aH7cwB7f+5cAutx4hkgypDMj38g/h4sQ8o=
+github.com/asticode/go-astikit v0.8.0/go.mod h1:h4ly7idim1tNhaVkdVBeXQZEE3L0xblP7fCWbgwipF0=
+github.com/asticode/go-astilectron v0.16.0 h1:zBZEoqiFo9pT9xwGZq7GtT2t0gJuDjHoo/pMab1vkXQ=
+github.com/asticode/go-astilectron v0.16.0/go.mod h1:bF7zkk11IwP8lBPhEl3cCtkKIwsRRR6264OFM1v3Yso=
+github.com/asticode/go-astilectron-bundler v0.7.0 h1:P5Ot4loRUMSgHMEkH+DIQ0adKvEuJQaVDEcUuxnGFRs=
+github.com/asticode/go-astilectron-bundler v0.7.0/go.mod h1:dHgXoS/SzrIcMIqzH9rhiWbZjUvjj4HNfUg+7sLeV1Q=
+github.com/asticode/go-bindata v1.0.0 h1:5whO0unjdx2kbAbzoBMS3307jKAEf3oQ1lJcx5RdgA8=
+github.com/asticode/go-bindata v1.0.0/go.mod h1:t/Y+/iCLrvaYkv8Y6PscRnyUeYzy9y9+8JC9CMcKdHY=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
@@ -23,6 +36,8 @@ github.com/ncruces/zenity v0.4.2/go.mod h1:01ClVZ8OwBjVpBFK38yaupCb0q5Bg+fZ7+HTS
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rakyll/statik v0.1.7 h1:OF3QCZUuyPxuGEP7B4ypUa7sB/iHtqOTDYZXGM8KOdQ=
 github.com/rakyll/statik v0.1.7/go.mod h1:AlZONWzMtEnMs7W4e/1LURLiI49pIMmp6V9Unghqrcc=
+github.com/sam-kamerer/go-plister v1.2.0 h1:ZdEF1bhPUoGzwz5eFljw2K/A+oRXq/81jul/A3CHKEY=
+github.com/sam-kamerer/go-plister v1.2.0/go.mod h1:gTt1Ko2oTA5bfDYsNcLjRGyyx6LPxHIeo0ZTtTRZG2I=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=

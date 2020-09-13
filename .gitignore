@@ -3,3 +3,5 @@ statik/
 bundle/
 dist/
 node_modules
+verto_desktop/
+verto_desktop.app/
