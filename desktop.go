@@ -2,20 +2,15 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 
-	"github.com/Dev43/arweave-go/wallet"
 	"github.com/mitchellh/go-homedir"
-	"github.com/ncruces/zenity"
 	_ "github.com/useverto/desktop/bundle"
-	"github.com/useverto/desktop/webview"
+	"github.com/zserge/lorca"
 )
 
 func main() {
 	log.Println("Starting thread loop")
-	// init
-	debug := true
 	_, err := setupWatcher()
 
 	if err != nil {
@@ -38,51 +33,12 @@ func main() {
 	// start the server with website source
 	Loadview()
 
-	// create webview instance
-	w := webview.New(debug)
-	defer w.Destroy()
-	w.SetTitle("Verto")
-	w.SetSize(2000, 2000, webview.HintNone)
-	w.Init(`
-	let x = setInterval(() => assignFileDialog(), 200);
-	async function assignFileDialog() {
-		if(window.location.pathname.startsWith("/login")) {
-			clearInterval(x)
-			let val = await window.native_file_dialog();
-			let addr = await window.native_wallet_addr(val);
-			localStorage.setItem("keyfile", val);
-			localStorage.setItem("address", addr);
-			window.location.href = "/app"
-		}
+	ui, err := lorca.New("http://localhost:8000/", "", 3000, 3000)
+	if err != nil {
+		fmt.Println(err)
 	}
-	`)
-	// open a native file dialog (only mac) and get file content
-	w.Bind("native_file_dialog", func() string {
-		file, err := zenity.SelectFile()
-		if err != nil {
-			fmt.Println("File reading error", err)
-			return ""
-		}
-		data, err := ioutil.ReadFile(file)
-		if err != nil {
-			fmt.Println("File reading error", err)
-			return ""
-		}
-		return string(data)
-	})
-	w.Bind("native_wallet_addr", func(keyfile string) string {
-		// create a new wallet instance
-		w := wallet.NewWallet()
-		// extract the key from the wallet instance
-		err = w.LoadKey([]byte(keyfile))
-		if err != nil {
-			fmt.Println("File reading error", err)
-		}
-		return w.Address()
-	})
-	// Render view
-	w.Navigate("http://localhost:8000/")
+	defer ui.Close()
 
-	// Run webview
-	w.Run()
+	// Wait for the browser window to be closed
+	<-ui.Done()
 }

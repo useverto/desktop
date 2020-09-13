@@ -13,5 +13,6 @@ require (
 	github.com/ncruces/zenity v0.4.2
 	github.com/rakyll/statik v0.1.7
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
+	github.com/zserge/lorca v0.1.9
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73 // indirect
 )
