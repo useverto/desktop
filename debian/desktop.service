@@ -1,0 +1,12 @@
+[Unit]
+Description=Verto Desktop
+
+[Service]
+PIDFile=/tmp/verto-desktop
+User=verto-desktop
+Group=verto-desktop
+WorkingDirectory=/tmp
+ExecStart=/usr/bin/verto-desktop
+
+[Install]
+WantedBy=multi-user.target

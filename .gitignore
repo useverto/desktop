@@ -5,3 +5,4 @@ dist/
 node_modules
 verto_desktop/
 verto_desktop.app/
+pkg-build/

@@ -1,0 +1,22 @@
+{
+    "name": "verto-desktop",
+    "maintainer": "Divy Srivastava <dj.srivastava23@gmail.com>",
+    "description": "Verto's desktop app",
+    "homepage": "http://github.com/useverto/desktop",
+    "systemd-file": "debian/desktop.service",
+    "files": [
+      {
+        "from": "desktop",
+        "to": "/usr/bin",
+        "fperm": "0755"
+      }
+    ],
+    "copyrights": [
+      {
+        "files": "*",
+        "copyright": "2020 Verto Team <dj.srivastava23@gmail.com>",
+        "license": "MIT",
+        "file": "LICENSE"
+      }
+    ]
+  }
