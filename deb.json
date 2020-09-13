@@ -4,11 +4,17 @@
     "description": "Verto's desktop app",
     "homepage": "http://github.com/useverto/desktop",
     "systemd-file": "debian/desktop.service",
+    "postinst-file": "debian/entry.sh",
     "files": [
       {
         "from": "desktop",
         "to": "/usr/bin",
         "fperm": "0755"
+      },
+      {
+        "from": "assets/verto_desktop.png",
+        "to": "/usr/bin",
+        "base": "assets"
       }
     ],
     "copyrights": [
