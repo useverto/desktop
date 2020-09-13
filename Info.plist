@@ -4,7 +4,7 @@
 	<dict>
 		<key>CFBundleIconFile</key>
 		<string>verto_desktop.icns</string>
-		<key></key>
+		<key>CFBundleDisplayName</key>
 		<string>Verto Desktop</string>
 		<key>CFBundleExecutable</key>
 		<string>verto_desktop</string>
