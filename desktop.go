@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/asticode/go-astikit"
+	"github.com/asticode/go-astilectron"
 	"github.com/mitchellh/go-homedir"
 	_ "github.com/useverto/desktop/bundle"
-	"github.com/zserge/lorca"
 )
 
 func main() {
@@ -32,13 +33,42 @@ func main() {
 
 	// start the server with website source
 	Loadview()
-
-	ui, err := lorca.New("http://localhost:8000/", "", 3000, 3000)
+	// Set logger
+	l := log.New(log.Writer(), log.Prefix(), log.Flags())
+	// Create astilectron
+	a, err := astilectron.New(l, astilectron.Options{
+		AppName:           "Verto Desktop",
+		BaseDirectoryPath: "verto_desktop",
+	})
 	if err != nil {
-		fmt.Println(err)
+		l.Fatal(fmt.Errorf("main: boot failed: %w", err))
 	}
-	defer ui.Close()
+	defer a.Close()
 
-	// Wait for the browser window to be closed
-	<-ui.Done()
+	// Handle signals
+	a.HandleSignals()
+
+	// Start
+	if err = a.Start(); err != nil {
+		l.Fatal(fmt.Errorf("main: boot failed: %w", err))
+	}
+
+	// New window
+	var w *astilectron.Window
+	if w, err = a.NewWindow("http://localhost:8000", &astilectron.WindowOptions{
+		Title:  astikit.StrPtr("Verto"),
+		Height: astikit.IntPtr(3000),
+		Width:  astikit.IntPtr(3000),
+		Icon:   astikit.StrPtr("./assets/verto_desktop.png"),
+	}); err != nil {
+		l.Fatal(fmt.Errorf("main: new window failed: %w", err))
+	}
+
+	// Create windows
+	if err = w.Create(); err != nil {
+		l.Fatal(fmt.Errorf("main: creating window failed: %w", err))
+	}
+
+	// Blocking pattern
+	a.Wait()
 }

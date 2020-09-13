@@ -1,5 +1,10 @@
 github.com/Dev43/arweave-go v0.0.2 h1:FCev9zsObUkqrIuToGKrx12C/SeWwAXJ3h+4D8vGhtI=
 github.com/Dev43/arweave-go v0.0.2/go.mod h1:C6uCtHMNvsimhVAnVWO7vs3c3Ug6IaHu6ITxklyv/1U=
+github.com/asticode/go-astikit v0.6.0/go.mod h1:h4ly7idim1tNhaVkdVBeXQZEE3L0xblP7fCWbgwipF0=
+github.com/asticode/go-astikit v0.8.0 h1:wWT7xLp96aH7cwB7f+5cAutx4hkgypDMj38g/h4sQ8o=
+github.com/asticode/go-astikit v0.8.0/go.mod h1:h4ly7idim1tNhaVkdVBeXQZEE3L0xblP7fCWbgwipF0=
+github.com/asticode/go-astilectron v0.16.0 h1:zBZEoqiFo9pT9xwGZq7GtT2t0gJuDjHoo/pMab1vkXQ=
+github.com/asticode/go-astilectron v0.16.0/go.mod h1:bF7zkk11IwP8lBPhEl3cCtkKIwsRRR6264OFM1v3Yso=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
