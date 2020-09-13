@@ -69,6 +69,7 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: |
             go build .
+            go get github.com/machinebox/appify
             sh ./tools/create_mac_app.sh
 
       - name: Build desktop app
@@ -81,5 +82,6 @@ jobs:
           name: verto-${{ matrix.os }}
           path: |
             ./src/github.com/useverto/desktop/*.deb
-            ./src/github.com/useverto/desktop/verto_desktop.app
+            ./src/github.com/useverto/desktop/Verto.app
             ./src/github.com/useverto/desktop/desktop.exe
+

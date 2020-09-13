@@ -59,7 +59,7 @@ func main() {
 		Title:  astikit.StrPtr("Verto"),
 		Height: astikit.IntPtr(3000),
 		Width:  astikit.IntPtr(3000),
-		Icon:   astikit.StrPtr("./assets/verto_desktop.png"),
+		Icon:   astikit.StrPtr(FindIcon()),
 	}); err != nil {
 		l.Fatal(fmt.Errorf("main: new window failed: %w", err))
 	}
