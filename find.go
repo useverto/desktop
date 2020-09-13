@@ -18,7 +18,7 @@ func LoadIcon() string {
 
 // FindIcon check if icon exists
 func FindIcon() bool {
-	if _, err := os.Stat("file-exists.go"); err == nil {
+	if _, err := os.Stat("verto_desktop.png"); err == nil {
 		return true
 	}
 	return false
