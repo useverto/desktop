@@ -59,7 +59,9 @@ jobs:
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'ubuntu')
-        run: go build .
+        run: |
+          go build .
+          sh ./tools/create_deb.sh
       
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
@@ -77,6 +79,6 @@ jobs:
         with:
           name: verto-${{ matrix.os }}
           path: |
-            ./src/github.com/useverto/desktop/desktop
+            ./src/github.com/useverto/desktop/*.deb
             ./src/github.com/useverto/desktop/verto_desktop.app
             ./src/github.com/useverto/desktop/desktop.exe
