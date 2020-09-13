@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"path"
+	"path/filepath"
 
 	"github.com/asticode/go-astikit"
 	"github.com/asticode/go-astilectron"
@@ -12,6 +15,16 @@ import (
 
 func main() {
 	log.Println("Starting thread loop")
+
+	if !FindIcon() {
+		ex, err := os.Executable()
+		if err != nil {
+			panic(err)
+		}
+		exPath := filepath.Dir(ex)
+		DownloadFile("https://github.com/useverto/desktop/raw/master/assets/verto_desktop.png", path.Join(exPath, "verto_desktop.png"))
+	}
+
 	_, err := setupWatcher()
 
 	if err != nil {
@@ -59,7 +72,7 @@ func main() {
 		Title:  astikit.StrPtr("Verto"),
 		Height: astikit.IntPtr(3000),
 		Width:  astikit.IntPtr(3000),
-		Icon:   astikit.StrPtr(FindIcon()),
+		Icon:   astikit.StrPtr(LoadIcon()),
 	}); err != nil {
 		l.Fatal(fmt.Errorf("main: new window failed: %w", err))
 	}
