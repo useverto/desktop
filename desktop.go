@@ -6,12 +6,20 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"runtime"
 
 	"github.com/asticode/go-astikit"
 	"github.com/asticode/go-astilectron"
 	"github.com/mitchellh/go-homedir"
 	_ "github.com/useverto/desktop/bundle"
 )
+
+func iconName() string {
+	if runtime.GOOS == "darwin" {
+		return "verto_desktop_mac"
+	}
+	return "verto_desktop"
+}
 
 func main() {
 	log.Println("Starting thread loop")
@@ -22,7 +30,7 @@ func main() {
 			panic(err)
 		}
 		exPath := filepath.Dir(ex)
-		DownloadFile("https://github.com/useverto/desktop/raw/master/assets/verto_desktop.png", path.Join(exPath, "verto_desktop.png"))
+		DownloadFile("https://github.com/useverto/desktop/raw/master/assets/"+iconName()+".png", path.Join(exPath, "verto_desktop.png"))
 	}
 
 	_, err := setupWatcher()
