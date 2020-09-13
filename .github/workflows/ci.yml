@@ -64,7 +64,9 @@ jobs:
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'macos')
-        run: go build -o verto_desktop.app/Contents/MacOS/verto_desktop .
+        run: |
+            go build .
+            sh ./tools/create_mac_app.sh
 
       - name: Build desktop app
         working-directory: ./src/github.com/useverto/desktop
