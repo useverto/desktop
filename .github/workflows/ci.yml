@@ -82,15 +82,6 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: go build -ldflags="-H windowsgui" .
 
-      - name: Build Windows MSI
-        working-directory: ./src/github.com/useverto/desktop
-        if: startsWith(matrix.os, 'windows')
-        run: |
-          go get github.com/mh-cbon/go-msi
-          go build -o ./go-msi.exe github.com/mh-cbon/go-msi 
-          ./go-msi.exe set-guid
-          ./go-msi.exe make --msi Verto.msi --version 0.1.0
-
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
         with:
