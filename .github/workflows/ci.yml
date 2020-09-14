@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-          path: './src/github.com/useverto/desktop'
+          path: "./src/github.com/useverto/desktop"
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -29,7 +29,7 @@ jobs:
 
       - name: Setup go
         uses: actions/setup-go@v2
-      
+
       - name: Install dependencies
         working-directory: ./src/github.com/useverto/desktop/verto
         run: |
@@ -38,9 +38,9 @@ jobs:
 
       - name: Build website source
         working-directory: ./src/github.com/useverto/desktop/verto
-        run: | 
-           yarn build
-           yarn export
+        run: |
+          yarn build
+          yarn export
 
       - name: Install libwebkit
         if: startsWith(matrix.os, 'ubuntu')
@@ -48,40 +48,60 @@ jobs:
           sudo apt-get update
           sudo apt-get install libwebkit2gtk-4.0-dev
           curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh | GH=mh-cbon/go-bin-deb sh -xe
-          
-      
+
       - name: Install deps
         run: |
           go get github.com/rakyll/statik github.com/mitchellh/go-homedir github.com/tcnksm/go-latest github.com/kardianos/osext github.com/fsnotify/fsnotify
-      
+
       - name: Compile website
         run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
-      
-      - name: Build desktop app
+
+      - name: Build Linux Deb
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           go build .
           sh ./tools/create_deb.sh
-      
-      - name: Build desktop app
+
+      - name: Build OSX app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'macos')
         run: |
-            go build .
-            go get github.com/machinebox/appify
-            sh ./tools/create_mac_app.sh
+          go build .
+          sh ./tools/create_mac_app.sh
 
-      - name: Build desktop app
+      - name: Build DMG
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          yarn global add appdmg
+          appdmg appdmg.json Verto.dmg
+
+      - name: Build Windows app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
         run: go build -ldflags="-H windowsgui" .
 
       - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'ubuntu')
         with:
-          name: verto-${{ matrix.os }}
-          path: |
-            ./src/github.com/useverto/desktop/*.deb
-            ./src/github.com/useverto/desktop/Verto.app
-            ./src/github.com/useverto/desktop/desktop.exe
+          name: verto-linux-x64.deb
+          path: ./src/github.com/useverto/desktop/*.deb
 
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'macos')
+        with:
+          name: Verto.dmg
+          path: ./src/github.com/useverto/desktop/*.dmg
+
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'macos')
+        with:
+          name: Verto.app
+          path: ./src/github.com/useverto/desktop/*.app
+
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'windows')
+        with:
+          name: Verto.msi
+          path: ./src/github.com/useverto/desktop/*.msi

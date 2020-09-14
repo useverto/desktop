@@ -1,0 +1,37 @@
+{
+    "product": "Verto",
+    "company": "The Verto Team",
+    "license": "LICENSE",
+    "upgrade-code": "8615055C-D8E0-404C-93BE-441C503BA6F0",
+    "files": {
+      "guid": "378896D8-6749-4821-870A-44CBBB791D0C",
+      "items": [
+        "desktop.exe"
+      ]
+    },
+    "env": {
+      "guid": "0CB88C7F-85A7-4986-B6CE-1CAD5C17EA0E",
+      "vars": [
+        {
+          "name": "PATH",
+          "value": "[INSTALLDIR]",
+          "permanent": "no",
+          "system": "no",
+          "action": "set",
+          "part": "last"
+        }
+      ]
+    },
+    "shortcuts": {
+      "guid": "6DAFD205-3D2D-43D7-BF78-33BFE8746D2A",
+      "items": [
+        {
+          "name": "Verto",
+          "description": "Verto's desktop app",
+          "target": "[INSTALLDIR]\\desktop.exe",
+          "wdir": "INSTALLDIR",
+          "arguments": ""
+        }
+      ]
+    }
+  }

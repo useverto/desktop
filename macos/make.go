@@ -72,7 +72,7 @@ func run() error {
 	}
 	info := infoListData{
 		Name:               *name,
-		Executable:         filepath.Join("MacOS", appname),
+		Executable:         appname,
 		Identifier:         id,
 		Version:            *version,
 		InfoString:         *name + " by " + *author,
