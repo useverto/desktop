@@ -82,10 +82,17 @@ jobs:
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
         run: go build -ldflags="-H windowsgui" .
+      
+      - name: Build Windows MSI
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'windows')
+        run: |
+            go get github.com/mh-cbon/go-msi
+            go run github.com/mh-cbon/go-msi set-guid
+            go run github.com/mh-cbon/go-msi make --msi Verto.msi --version 0.1.0
 
       - uses: actions/upload-artifact@v2
         with:
-          name: verto-${{ matrix.os }}
           path: |
             ./src/github.com/useverto/desktop/*.deb
             /src/github.com/useverto/desktop/*.dmg
