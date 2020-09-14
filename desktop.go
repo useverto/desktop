@@ -50,7 +50,6 @@ func main() {
 		DownloadRelease(downloadLoc)
 		// unzip the release zip
 		NewUnzip(downloadLoc, downloadLoc).Extract()
-
 	}
 
 	// start the server with website source

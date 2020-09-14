@@ -9,3 +9,7 @@ StartupNotify=true
 Name=Verto Desktop
 GenericName=Verto
 " >> /usr/share/applications/verto_desktop.desktop
+
+echo "[VERTO] Running first-time bootstrap"
+cd /usr/bin/
+./desktop
