@@ -29,30 +29,44 @@ You can access the code for our website [here](https://github.com/useverto/verto
 
 Before building the desktop application, you will need `go` installed on your machine.
 
-You can install `statik` via Go CLI
-
- ```shell script
- go get github.com/rakyll/statik
- ```
-
-**Linux**
-
-Run the below command for your specific platform to install the Linux requirements.
-
-```sh
-# Ubuntu
-sudo apt-get install libwebkit2gtk-4.0-dev
-# Fedora
-sudo dnf install webkit2gtk3-devel.x86_64
-```
 ### Building
 
+**Unix**
 ```sh
 # build the website
 make web
-# build the desktop application
+# build the desktop binary
 make build
 ```
+
+**Windows**
+```sh
+# compile website
+go run useverto/desktop/fs/embed.go -src=./verto/__sapper__/export
+# build the executable
+go build -ldflags="-H windowsgui" .
+```
+
+### Packaging the binary
+
+**Linux**
+
+```shell script
+# create debian
+sh ./tools/create_deb.sh
+# install debian
+sudo dpkg -i verto-desktop_0.1.0_amd64.deb
+```
+
+**MacOS**
+
+```shell script
+# create mac app
+sh ./toos/create_mac_app.sh
+# run the application
+open Verto.app
+```
+
 ## License
 
 The code contained within this repository is licensed under the MIT license.
