@@ -16,24 +16,25 @@ import (
 
 func iconName() string {
 	if runtime.GOOS == "darwin" {
-		return "verto_desktop_mac"
+		return ".icns"
 	}
-	return "verto_desktop"
+	return ".png"
 }
 
 func main() {
 	log.Println("Starting thread loop")
-
-	if !FindIcon() {
-		ex, err := os.Executable()
-		if err != nil {
-			panic(err)
-		}
-		exPath := filepath.Dir(ex)
-		DownloadFile("https://github.com/useverto/desktop/raw/master/assets/"+iconName()+".png", path.Join(exPath, "verto_desktop.png"))
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	iconExt := iconName()
+	iconPath := path.Join(exPath, "verto_desktop"+iconExt)
+	if !FindIcon(iconPath) {
+		DownloadFile("https://github.com/useverto/desktop/raw/master/assets/verto_desktop"+iconExt, iconPath)
 	}
 
-	_, err := setupWatcher()
+	_, err = setupWatcher()
 
 	if err != nil {
 		// do something sensible
@@ -58,8 +59,10 @@ func main() {
 	l := log.New(log.Writer(), log.Prefix(), log.Flags())
 	// Create astilectron
 	a, err := astilectron.New(l, astilectron.Options{
-		AppName:           "Verto Desktop",
-		BaseDirectoryPath: "verto_desktop",
+		AppName:            "Verto Desktop",
+		BaseDirectoryPath:  "verto_desktop",
+		AppIconDefaultPath: iconPath,
+		AppIconDarwinPath:  iconPath,
 	})
 	if err != nil {
 		l.Fatal(fmt.Errorf("main: boot failed: %w", err))
@@ -80,7 +83,7 @@ func main() {
 		Title:  astikit.StrPtr("Verto"),
 		Height: astikit.IntPtr(3000),
 		Width:  astikit.IntPtr(3000),
-		Icon:   astikit.StrPtr(LoadIcon()),
+		Icon:   astikit.StrPtr(iconPath),
 	}); err != nil {
 		l.Fatal(fmt.Errorf("main: new window failed: %w", err))
 	}
