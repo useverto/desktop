@@ -57,22 +57,28 @@ jobs:
       - name: Compile website
         run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
       
-      - name: Build desktop app
+      - name: Build Linux Deb
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           go build .
           sh ./tools/create_deb.sh
       
-      - name: Build desktop app
+      - name: Build OSX app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'macos')
         run: |
             go build .
-            go get github.com/machinebox/appify
             sh ./tools/create_mac_app.sh
+      
+      - name: Build DMG
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'macos')
+        run: |
+            yarn global add appdmg
+            appdmg appdmg.json Verto.dmg
 
-      - name: Build desktop app
+      - name: Build Windows app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
         run: go build -ldflags="-H windowsgui" .
@@ -82,6 +88,7 @@ jobs:
           name: verto-${{ matrix.os }}
           path: |
             ./src/github.com/useverto/desktop/*.deb
+            /src/github.com/useverto/desktop/*.dmg
             ./src/github.com/useverto/desktop/Verto.app
             ./src/github.com/useverto/desktop/desktop.exe
 
