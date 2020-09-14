@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/Dev43/arweave-go v0.0.2
-	github.com/JackMordaunt/icns v1.0.0 // indirect
+	github.com/JackMordaunt/icns v1.0.0
 	github.com/akavel/rsrc v0.9.0 // indirect
 	github.com/asticode/go-astikit v0.8.0
 	github.com/asticode/go-astilectron v0.16.0
@@ -18,7 +18,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/ncruces/zenity v0.4.2
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/rakyll/statik v0.1.7
 	github.com/tcnksm/go-latest v0.0.0-20170313132115-e3007ae9052e
 	github.com/zserge/lorca v0.1.9
