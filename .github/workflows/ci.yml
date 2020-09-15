@@ -30,24 +30,9 @@ jobs:
       - name: Setup go
         uses: actions/setup-go@v2
 
-      - name: Install dependencies
-        working-directory: ./src/github.com/useverto/desktop/verto
-        run: |
-          npm i -g yarn
-          yarn
-
-      - name: Build website source
-        working-directory: ./src/github.com/useverto/desktop/verto
-        run: |
-          yarn build
-          yarn export
-
       - name: Install libwebkit
         if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          sudo apt-get update
-          sudo apt-get install libwebkit2gtk-4.0-dev
-          curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh | GH=mh-cbon/go-bin-deb sh -xe
+        run: curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh | GH=mh-cbon/go-bin-deb sh -xe
 
       - name: Install Wix Toolset 3
         if: startsWith(matrix.os, 'windows')
@@ -58,10 +43,6 @@ jobs:
       - name: Install Go deps
         run: |
           go get github.com/rakyll/statik github.com/mitchellh/go-homedir github.com/tcnksm/go-latest github.com/kardianos/osext github.com/fsnotify/fsnotify
-
-      - name: Compile website
-        run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
-
       - name: Build Linux Deb
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'ubuntu')

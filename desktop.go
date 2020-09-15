@@ -11,7 +11,6 @@ import (
 	"github.com/asticode/go-astikit"
 	"github.com/asticode/go-astilectron"
 	"github.com/mitchellh/go-homedir"
-	_ "github.com/useverto/desktop/bundle"
 )
 
 func iconName() string {
