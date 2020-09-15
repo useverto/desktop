@@ -9,6 +9,8 @@
 
     <Media Id='1' Cabinet='Verto.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
     <Property Id='DiskPrompt' Value="Verto's Desktop App 1.0 Installation [1]" />
+    <Icon Id="icon.ico" SourceFile="assets/icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <Directory Id='TARGETDIR' Name='SourceDir'>
       <Directory Id='ProgramFilesFolder' Name='PFiles'>
@@ -16,16 +18,35 @@
           <Directory Id='INSTALLDIR' Name='Verto Desktop'>
 
             <Component Id='MainExecutable' Guid='ABCDDCBA-83F1-4F22-985B-FDB3C8ABD471'>
-              <File Id='FoobarEXE' Name='desktop.exe' DiskId='1' Source='desktop.exe' KeyPath='yes'/>
+              <File Id='DesktopEXE' Name='desktop.exe' DiskId='1' Source='desktop.exe' KeyPath='yes'/>
             </Component>
 
           </Directory>
         </Directory>
       </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+          <Directory Id="ApplicationProgramsFolder" Name="Verto Desktop"/>
+      </Directory>
+      
     </Directory>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+        <Component Id="ApplicationShortcut" Guid="ABCDDCBA-16C7-2E14-AFC0-86416069ABDE">
+            <Shortcut Id="ApplicationStartMenuShortcut" 
+                      Name="Verto Desktop"
+                      Description="Verto's desktop app"
+                      Target="[#DesktopEXE]"
+                      Icon="icon.ico"
+                      WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+            <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+            <RegistryValue Root="HKCU" Key="VertoDesktop" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        </Component>
+    </DirectoryRef>
 
     <Feature Id='Complete' Level='1'>
       <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id="ApplicationShortcut" />
     </Feature>
 
   </Product>
