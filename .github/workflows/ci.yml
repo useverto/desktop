@@ -86,7 +86,7 @@ jobs:
       - name: Build Windows app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
-        run: go build -ldflags="-H windowsgui" .
+        run: go build -ldflags="-H windowsgui" -o ./win/desktop.exe .
       
       - name: Build Windows MSI
         working-directory: ./src/github.com/useverto/desktop
@@ -96,7 +96,7 @@ jobs:
           $env:PATH = $env:PATH + $wixToolsetBinPath
           [Environment]::SetEnvironmentVariable("Path", $env:PATH, [EnvironmentVariableTarget]::Machine)
           candle.exe -out Verto.wixobj Verto.wxs
-          light.exe -b ./desktop.exe Verto.wixobj -out Verto.msi
+          light.exe -b ./win Verto.wixobj -out Verto.msi
 
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
