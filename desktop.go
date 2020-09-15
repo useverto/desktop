@@ -52,8 +52,6 @@ func main() {
 		NewUnzip(downloadLoc, downloadLoc).Extract()
 	}
 
-	// start the server with website source
-	Loadview()
 	// Set logger
 	l := log.New(log.Writer(), log.Prefix(), log.Flags())
 	// Create astilectron
@@ -78,7 +76,7 @@ func main() {
 
 	// New window
 	var w *astilectron.Window
-	if w, err = a.NewWindow("http://localhost:8000", &astilectron.WindowOptions{
+	if w, err = a.NewWindow("https://verto.exchange", &astilectron.WindowOptions{
 		Title:  astikit.StrPtr("Verto"),
 		Height: astikit.IntPtr(3000),
 		Width:  astikit.IntPtr(3000),
