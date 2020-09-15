@@ -33,77 +33,97 @@ jobs:
 
       - name: Build website source
         working-directory: ./src/github.com/useverto/desktop/verto
-        run: | 
+        run: |
           yarn build
           yarn export
 
-      - name: Install libwebkit
-        if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          sudo apt-get update
-          sudo apt-get install libwebkit2gtk-4.0-dev
-          
-      
-      - name: Install statik
+      - name: Install Go deps
         run: go get github.com/rakyll/statik github.com/mitchellh/go-homedir github.com/tcnksm/go-latest github.com/kardianos/osext github.com/fsnotify/fsnotify   
       
       - name: Compile website
         run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
-      
-      - name: Build desktop app
+
+      - name: Install Wix Toolset 3
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          curl -OLS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe
+          .\wix311.exe /install /quiet /norestart
+        
+      - name: Install Go deps
+        run: |
+          go get github.com/rakyll/statik github.com/mitchellh/go-homedir github.com/tcnksm/go-latest github.com/kardianos/osext github.com/fsnotify/fsnotify
+
+      - name: Compile website
+        run: go run ./src/github.com/useverto/desktop/fs/embed.go -src=${{ github.workspace }}/src/github.com/useverto/desktop/verto/__sapper__/export --dest=${{ github.workspace }}/src/github.com/useverto/desktop
+
+      - name: Build Linux Deb
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'ubuntu')
-        run: go build .
-      
-      - name: Build desktop app
-        working-directory: ./src/github.com/useverto/desktop
-        if: startsWith(matrix.os, 'macos')
-        run: go build .
+        run: |
+          go build .
+          sh ./tools/create_deb.sh
 
-      - name: Build desktop app
+      - name: Build OSX app
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'macos')
+        run: |
+          go build .
+          sh ./tools/create_mac_app.sh
+
+      - name: Build DMG
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          yarn global add appdmg
+          appdmg appdmg.json Verto.dmg
+
+      - name: Build Windows app
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'windows')
         run: go build -ldflags="-H windowsgui" .
       
-      - name: Zip linux release
-        if: startsWith(matrix.os, 'ubuntu')
+      - name: Build Windows MSI
         working-directory: ./src/github.com/useverto/desktop
-        run: |
-          zip -r desktop-x64-linux.zip desktop README.md
-      
-      - name: Zip mac release
-        if: startsWith(matrix.os, 'mac')
-        working-directory: ./src/github.com/useverto/desktop
-        run: |
-          zip -r desktop-x64-macos.zip desktop README.md
-      
-      - name: Zip windows release
         if: startsWith(matrix.os, 'windows')
-        working-directory: ./src/github.com/useverto/desktop
         run: |
-          Compress-Archive -CompressionLevel Optimal -Force -Path desktop.exe, README.md -DestinationPath desktop-x64-windows.zip
-      
-      - name: Upload release artifacts
-        uses: actions/upload-artifact@v2
+          candle.exe -out Verto.wixobj Verto.wxs
+          light.exe -b ./desktop.exe Verto.wixobj -out Verto.msi
+
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'ubuntu')
         with:
-          name: release
-          path: |
-            desktop-x64-linux.zip
-            desktop-x64-macos.zip
-            desktop-x64-windows.zip
-  
+          name: verto-linux-x64.deb
+          path: ./src/github.com/useverto/desktop/*.deb
+
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'macos')
+        with:
+          name: Verto.dmg
+          path: ./src/github.com/useverto/desktop/*.dmg
+
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'macos')
+        with:
+          name: Verto.app
+          path: ./src/github.com/useverto/desktop/*.app
+
+      - uses: actions/upload-artifact@v2
+        if: startsWith(matrix.os, 'windows')
+        with:
+          name: Verto.msi
+          path: ./src/github.com/useverto/desktop/*.msi
+
       - name: Download artifacts
         uses: actions/download-artifact@v2
 
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.version.outputs.tag }}
-          name: ${{ steps.version.outputs.tag }}
+          tag: DRAFT
+          name: DRAFT
           draft: true
           prerelease: false
           allowUpdates: true
           replacesArtifacts: true
           artifacts: "release/*"
-          bodyFile: "notes/release.md"
           token: ${{ secrets.GITHUB_TOKEN }}
