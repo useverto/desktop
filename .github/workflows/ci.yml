@@ -49,7 +49,12 @@ jobs:
           sudo apt-get install libwebkit2gtk-4.0-dev
           curl -L https://raw.githubusercontent.com/mh-cbon/latest/master/install.sh | GH=mh-cbon/go-bin-deb sh -xe
 
-      - name: Install deps
+      - name: Install Wix Toolset 3
+        run: |
+           curl -OLS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe
+          .\wix311.exe /install /quiet /norestart
+        
+      - name: Install Go deps
         run: |
           go get github.com/rakyll/statik github.com/mitchellh/go-homedir github.com/tcnksm/go-latest github.com/kardianos/osext github.com/fsnotify/fsnotify
 
@@ -81,6 +86,11 @@ jobs:
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
         run: go build -ldflags="-H windowsgui" .
+      
+      - name: Build Windows MSI
+        working-directory: ./src/github.com/useverto/desktop
+        if: startsWith(matrix.os, 'windows')
+        run: ./tools/create_msi
 
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
