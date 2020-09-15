@@ -92,7 +92,6 @@ jobs:
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
         run: .\tools\create_msi.ps1
-        shell: powershell
 
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu')
