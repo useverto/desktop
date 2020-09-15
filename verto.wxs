@@ -9,7 +9,7 @@
 
     <Media Id='1' Cabinet='Verto.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
     <Property Id='DiskPrompt' Value="Verto's Desktop App 1.0 Installation [1]" />
-    <Icon Id="icon.ico" SourceFile="assets/icon.ico"/>
+    <Icon Id="icon.ico" SourceFile="assets/verto_desktop.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <Directory Id='TARGETDIR' Name='SourceDir'>
