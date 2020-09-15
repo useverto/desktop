@@ -37,10 +37,11 @@ func run() error {
 	}
 	bin := args[0]
 	appname := *name + ".app"
+	execName := strings.ToLower(*name)
 	contentsPath := filepath.Join(appname, "Contents")
 	appPath := filepath.Join(contentsPath, "MacOS")
 	resouresPath := filepath.Join(contentsPath, "Resources")
-	binPath := filepath.Join(appPath, appname)
+	binPath := filepath.Join(appPath, execName)
 	if err := os.MkdirAll(appPath, 0777); err != nil {
 		return errors.Wrap(err, "os.MkdirAll appPath")
 	}
@@ -67,12 +68,9 @@ func run() error {
 		return errors.Wrap(err, "chmod: "+binPath)
 	}
 	id := *identifier
-	if id == "" {
-		id = *author + "." + *name
-	}
 	info := infoListData{
 		Name:               *name,
-		Executable:         appname,
+		Executable:         execName,
 		Identifier:         id,
 		Version:            *version,
 		InfoString:         *name + " by " + *author,
@@ -155,8 +153,6 @@ const infoPlistTemplate = `<?xml version="1.0" encoding="UTF-8"?>
 	<dict>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
-		<key>CFBundleInfoDictionaryVersion</key>
-		<string>6.0</string>
 		<key>CFBundleName</key>
 		<string>{{ .Name }}</string>
 		<key>CFBundleExecutable</key>
