@@ -92,6 +92,9 @@ jobs:
         working-directory: ./src/github.com/useverto/desktop
         if: startsWith(matrix.os, 'windows')
         run: |
+          $wixToolsetBinPath = ";C:\Program Files (x86)\WiX Toolset v3.11\bin;"
+          $env:PATH = $env:PATH + $wixToolsetBinPath
+          [Environment]::SetEnvironmentVariable("Path", $env:PATH, [EnvironmentVariableTarget]::Machine)
           candle.exe -out Verto.wixobj Verto.wxs
           light.exe -b ./desktop.exe Verto.wixobj -out Verto.msi
 
