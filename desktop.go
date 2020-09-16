@@ -11,7 +11,6 @@ import (
 	"github.com/asticode/go-astikit"
 	"github.com/asticode/go-astilectron"
 	"github.com/gen2brain/beeep"
-	"github.com/mitchellh/go-homedir"
 )
 
 func iconName() string {
@@ -39,17 +38,6 @@ func main() {
 	if err != nil {
 		// do something sensible
 		log.Fatal(err)
-	}
-
-	// upgrade the desktop version
-	if NeedsUpgrade() {
-		log.Printf("%s is not latest, upgrading...", version)
-		// determine download location
-		downloadLoc, _ := homedir.Expand(`~/.verto_desktop`)
-		// download latest release from github
-		DownloadRelease(downloadLoc)
-		// unzip the release zip
-		NewUnzip(downloadLoc, downloadLoc).Extract()
 	}
 
 	// Set logger

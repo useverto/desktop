@@ -66,6 +66,17 @@ sh ./toos/create_mac_app.sh
 # run the application
 open Verto.app
 ```
+**Windows**
+
+```ps1
+# download Wix Toolset 3 (skip if you already have it installed)
+curl -OLS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe
+.\wix311.exe /install /quiet /norestart
+
+# create MSI installer for the built binary (make sure you have wix in your PATH env var)
+candle.exe -out Verto.wixobj Verto.wxs
+light.exe -b ./win Verto.wixobj -out Verto.msi
+```
 
 ## License
 
