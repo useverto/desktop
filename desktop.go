@@ -75,7 +75,7 @@ func main() {
 
 	// New window
 	var w *astilectron.Window
-	if w, err = a.NewWindow("https://verto.exchange", &astilectron.WindowOptions{
+	if w, err = a.NewWindow("https://verto.exchange/login", &astilectron.WindowOptions{
 		Title:  astikit.StrPtr("Verto"),
 		Height: astikit.IntPtr(3000),
 		Width:  astikit.IntPtr(3000),
