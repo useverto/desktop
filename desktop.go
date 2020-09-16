@@ -10,6 +10,7 @@ import (
 
 	"github.com/asticode/go-astikit"
 	"github.com/asticode/go-astilectron"
+	"github.com/gen2brain/beeep"
 	"github.com/mitchellh/go-homedir"
 )
 
@@ -53,6 +54,12 @@ func main() {
 
 	// Set logger
 	l := log.New(log.Writer(), log.Prefix(), log.Flags())
+	if !DetectBootstrap() {
+		err := beeep.Alert("Verto Desktop", "Hang on for a few seconds while Verto initialises...", iconPath)
+		if err != nil {
+			fmt.Println("main: user alert failed: %w", err)
+		}
+	}
 	// Create astilectron
 	a, err := astilectron.New(l, astilectron.Options{
 		AppName:            "Verto Desktop",
