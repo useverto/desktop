@@ -56,7 +56,7 @@ func main() {
 	// Create astilectron
 	a, err := astilectron.New(l, astilectron.Options{
 		AppName:            "Verto Desktop",
-		BaseDirectoryPath:  "verto_desktop",
+		BaseDirectoryPath:  os.TempDir(),
 		AppIconDefaultPath: iconPath,
 		AppIconDarwinPath:  iconPath,
 	})
